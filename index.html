@@ -16,10 +16,10 @@
           <div class="col s12 m8">
             <div class="row">
               <div class="col s8 input-field">
-                <input type="text" placeholder="Search here">
+                <input type="text" placeholder="Search here" ng-model="searchFor">
               </div>
               <div class="col s4 input-field">
-                <select>
+                <select ng-model="sortBy" ng-init="sortBy = 'name'">
                   <option value="name">Name</option>
                   <option value="rating">Rating</option>
                 </select>
@@ -36,6 +36,13 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="col s12 m4" ng-repeat="camera in cameras | orderBy:sortBy | filter:{name:searchFor}">
+          <h1>{{ camera.name }}</h1>
+          <span><img src="{{ camera.image }}"></img></span>
+          <h2>Price: {{ camera.price | currency }}</h2>
+          <h3>Rating: {{ camera.rating | stars }}</h3>
+          <h1>{{ camera.onSale ? 'On sale!' : ''}}</h1>
         </div>
       </main>
     </div>
