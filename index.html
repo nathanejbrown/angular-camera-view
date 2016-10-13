@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Camera View</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css">
   </head>
@@ -30,19 +31,29 @@
             <div class="card blue-grey">
               <div class="card-content white-text">
                 <span class="card-title">Your Cart</span>
+                <ul ng-repeat="product in products">
+                  <li>{{ product.name }} {{ product.price | currency }} {{ product.quantity > 1 ? 'x' + product.quantity : ''}}</li>
+                </ul>
               </div>
               <div class="card-action">
+                <p>Subtotal: {{ subtotal | currency}}</p>
+                <p>Tax: {{ tax | currency}}</p>
+                <p>Total: {{ total | currency}}</p>
                 <a href="#">Checkout</a>
               </div>
             </div>
           </div>
         </div>
-        <div class="col s12 m4" ng-repeat="camera in cameras | orderBy:sortBy | filter:{name:searchFor}">
+        <div class="col s12 m4" ng-repeat="camera in cameras | orderBy:sortBy | filter:{name:searchFor}" ng-controller="productCtrl as productController">
           <h1>{{ camera.name }}</h1>
-          <span><img src="{{ camera.image }}"></img></span>
+          <span><img ng-src="{{ camera.image }}"></img></span>
           <h2>Price: {{ camera.price | currency }}</h2>
           <h3>Rating: {{ camera.rating | stars }}</h3>
           <h1>{{ camera.onSale ? 'On sale!' : ''}}</h1>
+          <button class="btn waves-effect waves-light" ng-click="productController.addProduct(camera)">
+            Add to Cart
+            <i class="material-icons right">shopping_cart</i>
+          </button>
         </div>
       </main>
     </div>
@@ -50,5 +61,6 @@
     <script src="js/angular.min.js"></script>
     <script src="js/materialize.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
   </body>
 </html>
