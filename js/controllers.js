@@ -41,7 +41,6 @@
       $rootScope.tax += (tempTax);
       $rootScope.subtotal += product.price;
       $rootScope.total = ($rootScope.tax + $rootScope.subtotal);
-      console.log($rootScope.tax, $rootScope.subtotal, $rootScope.total);
     };
   })
 
