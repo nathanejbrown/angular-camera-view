@@ -45,7 +45,7 @@
             <div class="card-content white-text" ng-controller="deleteController as delete">
               <span class="card-title">Your Cart</span>
               <ul ng-repeat="product in products">
-                <li>{{ product.name }} {{ product.price | currency }} {{ product.quantity > 1 ? 'x' + product.quantity : ''}} <button class="btn-floating btn-large waves-effect waves-light red" ng-click="delete.deleteProduct(product.name)"><i class="material-icons">delete</i></button></li>
+                <li>{{ product.name }} {{ product.price | currency }} {{ product.quantity > 1 ? 'x' + product.quantity : ''}} <button class="btn-floating btn-large waves-effect waves-light red" ng-click="delete.deleteProduct(product)"><i class="material-icons">delete</i></button></li>
               </ul>
             </div>
             <div class="card-action" ng-if="products.length">

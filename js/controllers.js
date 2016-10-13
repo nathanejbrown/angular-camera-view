@@ -45,9 +45,13 @@
   })
 
   app.controller('deleteController', function ($rootScope) {
-    this.deleteProduct = function (name) {
+    this.deleteProduct = function (product) {
       $rootScope.products.forEach((item, index) => {
-        if (item.name === name) {
+        if (item.name === product.name) {
+          let tempTax = ((item.quantity * item.price) * .0816);
+          $rootScope.tax -= tempTax;
+          $rootScope.subtotal -= (item.price);
+          $rootScope.total -= ((item.price * item.quantity) + tempTax);
           $rootScope.products.splice(index, 1);
         }
       });
