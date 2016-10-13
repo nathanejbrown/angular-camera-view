@@ -11,13 +11,13 @@
     $rootScope.total = 0;
 
     this.checkForDupes = function(array, newItem) {
-      let returnBoolean = -1;
+      let returnNotBoolean = -1;
       array.forEach(function(item, index) {
         if (item.name === newItem.name) {
-          returnBoolean = index;
+          returnNotBoolean = index;
         }
       })
-      return returnBoolean;
+      return returnNotBoolean;
     }
 
     this.addProduct = function(product) {
@@ -43,5 +43,15 @@
       $rootScope.total = ($rootScope.tax + $rootScope.subtotal);
     };
   })
+
+  app.controller('deleteController', function ($rootScope) {
+    this.deleteProduct = function (name) {
+      $rootScope.products.forEach((item, index) => {
+        if (item.name === name) {
+          $rootScope.products.splice(index, 1);
+        }
+      });
+    };
+  });
 
 }());

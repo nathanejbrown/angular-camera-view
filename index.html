@@ -26,35 +26,37 @@
                 </select>
               </div>
             </div>
-          </div>
-          <div class="col s12 m4">
-            <div class="card blue-grey">
-              <div class="card-content white-text">
-                <span class="card-title">Your Cart</span>
-                <ul ng-repeat="product in products">
-                  <li>{{ product.name }} {{ product.price | currency }} {{ product.quantity > 1 ? 'x' + product.quantity : ''}}</li>
-                </ul>
+            <div class="row">
+              <div class="col s12 m8" ng-repeat="camera in cameras | orderBy:sortBy | filter:{name:searchFor}" ng-controller="productCtrl as productController">
+                <h1>{{ camera.name }}</h1>
+                <span><img ng-src="{{ camera.image }}"></img></span>
+                <h2>Price: {{ camera.price | currency }}</h2>
+                <h3>Rating: {{ camera.rating | stars }}</h3>
+                <h1>{{ camera.onSale ? 'On sale!' : ''}}</h1>
+                <button class="btn waves-effect waves-light" ng-click="productController.addProduct(camera)">
+                  Add to Cart
+                  <i class="material-icons right">shopping_cart</i>
+                </button>
               </div>
-              <div class="card-action" ng-if="products.length">
-                <p>Subtotal: {{ subtotal | currency}}</p>
-                <p>Tax: {{ tax | currency}}</p>
-                <p>Total: {{ total | currency}}</p>
-                <a href="#">Checkout</a>
-              </div>
+            </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="card blue-grey">
+            <div class="card-content white-text" ng-controller="deleteController as delete">
+              <span class="card-title">Your Cart</span>
+              <ul ng-repeat="product in products">
+                <li>{{ product.name }} {{ product.price | currency }} {{ product.quantity > 1 ? 'x' + product.quantity : ''}} <button class="btn-floating btn-large waves-effect waves-light red" ng-click="delete.deleteProduct(product.name)"><i class="material-icons">delete</i></button></li>
+              </ul>
+            </div>
+            <div class="card-action" ng-if="products.length">
+              <p>Subtotal: {{ subtotal | currency}}</p>
+              <p>Tax: {{ tax | currency}}</p>
+              <p>Total: {{ total | currency}}</p>
+              <a href="#">Checkout</a>
             </div>
           </div>
         </div>
-        <div class="col s12 m4" ng-repeat="camera in cameras | orderBy:sortBy | filter:{name:searchFor}" ng-controller="productCtrl as productController">
-          <h1>{{ camera.name }}</h1>
-          <span><img ng-src="{{ camera.image }}"></img></span>
-          <h2>Price: {{ camera.price | currency }}</h2>
-          <h3>Rating: {{ camera.rating | stars }}</h3>
-          <h1>{{ camera.onSale ? 'On sale!' : ''}}</h1>
-          <button class="btn waves-effect waves-light" ng-click="productController.addProduct(camera)">
-            Add to Cart
-            <i class="material-icons right">shopping_cart</i>
-          </button>
-        </div>
+      </div>
       </main>
     </div>
     <script src="js/jquery-2.1.4.min.js"></script>
