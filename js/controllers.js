@@ -11,13 +11,13 @@
     $rootScope.total = 0;
 
     this.checkForDupes = function(array, newItem) {
-      let returnNotBoolean = -1;
+      let wesWillHateThisVariableName = -1;
       array.forEach(function(item, index) {
         if (item.name === newItem.name) {
-          returnNotBoolean = index;
+          wesWillHateThisVariableName = index;
         }
       })
-      return returnNotBoolean;
+      return wesWillHateThisVariableName;
     }
 
     this.addProduct = function(product) {
